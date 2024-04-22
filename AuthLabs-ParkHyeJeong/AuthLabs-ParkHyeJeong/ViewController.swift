@@ -19,23 +19,38 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.sceneView.delegate = self
-        self.sceneView.showsStatistics = true
-        
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        self.sceneView.scene = scene
+        setSceneView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let configuration = ARWorldTrackingConfiguration()
-        self.sceneView.session.run(configuration)
+        runSceneViewSession()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        pauseSceneViewSession()
+    }
+}
+
+private extension ViewController {
+    func setSceneView() {
+        self.sceneView.delegate = self
+        self.sceneView.showsStatistics = true
+        
+        let textureResourceName = "art.scnassets/ship.scn"
+        guard let scene = SCNScene(named: textureResourceName) else { return }
+        self.sceneView.scene = scene
+    }
+    
+    func runSceneViewSession() {
+        let configuration = ARWorldTrackingConfiguration()
+        self.sceneView.session.run(configuration)
+    }
+    
+    func pauseSceneViewSession() {
         self.sceneView.session.pause()
     }
 }
@@ -48,7 +63,6 @@ extension ViewController: ARSCNViewDelegate {
         nodeFor anchor: ARAnchor
     ) -> SCNNode? {
         let node = SCNNode()
-        
         return node
     }
 }
