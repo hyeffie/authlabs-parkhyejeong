@@ -12,13 +12,26 @@ import UIKit
 final class ViewController: UIViewController {
     // MARK: - Outlets
     
-    @IBOutlet var sceneView: ARSCNView!
+    private lazy var sceneView: ARSCNView = {
+        let sceneView = ARSCNView(frame: self.view.frame)
+        return sceneView
+    }()
+    
+    // MARK: - Initializers
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - View Life cycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setSceneView()
     }
     
