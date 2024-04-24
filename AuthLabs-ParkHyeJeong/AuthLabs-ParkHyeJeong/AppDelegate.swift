@@ -15,15 +15,19 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        setWindow()
         setRootDestination()
         return true
     }
 }
 
 private extension AppDelegate {
+    func setWindow() {
+        self.window = UIWindow()
+    }
+    
     func setRootDestination() {
         let rootViewController = ViewController()
-        rootViewController.view.backgroundColor = .cyan
         self.window?.rootViewController = rootViewController
         self.window?.makeKeyAndVisible()
     }

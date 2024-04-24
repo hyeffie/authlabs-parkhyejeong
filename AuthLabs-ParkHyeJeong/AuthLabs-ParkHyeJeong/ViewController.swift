@@ -10,16 +10,14 @@ import SceneKit
 import UIKit
 
 final class ViewController: UIViewController {
-    // MARK: - Outlets
+    // MARK: - Views
     
-    private lazy var sceneView: ARSCNView = {
-        let sceneView = ARSCNView(frame: self.view.frame)
-        return sceneView
-    }()
+    private let sceneView: ARSCNView
     
     // MARK: - Initializers
     
     init() {
+        self.sceneView = .init()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -30,14 +28,14 @@ final class ViewController: UIViewController {
     
     // MARK: - View Life cycle Methods
     
+    override func loadView() {
+        super.loadView()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setSceneView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+        setIdleTimerAbility()
         runSceneViewSession()
     }
     
@@ -46,25 +44,44 @@ final class ViewController: UIViewController {
         
         pauseSceneViewSession()
     }
+    
+    deinit {
+        resetIdleTimerAbility()
+    }
 }
 
 private extension ViewController {
     func setSceneView() {
+        self.view = self.sceneView
         self.sceneView.delegate = self
+        self.sceneView.session.delegate = self
         self.sceneView.showsStatistics = true
-        
-        let textureResourceName = "art.scnassets/ship.scn"
-        guard let scene = SCNScene(named: textureResourceName) else { return }
-        self.sceneView.scene = scene
     }
     
     func runSceneViewSession() {
-        let configuration = ARWorldTrackingConfiguration()
-        self.sceneView.session.run(configuration)
+        let referenceGroupName = "Markers"
+        guard
+            let referenceImages = ARReferenceImage.referenceImages(
+                inGroupNamed: referenceGroupName,
+                bundle: nil
+            )
+        else { return }
+        
+        let arConfiguration = ARWorldTrackingConfiguration()
+        arConfiguration.detectionImages = referenceImages
+        self.sceneView.session.run(arConfiguration)
     }
     
     func pauseSceneViewSession() {
         self.sceneView.session.pause()
+    }
+    
+    func setIdleTimerAbility() {
+        UIApplication.shared.isIdleTimerDisabled = true
+    }
+    
+    func resetIdleTimerAbility() {
+        UIApplication.shared.isIdleTimerDisabled = false
     }
 }
 
@@ -75,7 +92,12 @@ extension ViewController: ARSCNViewDelegate {
         _ renderer: SCNSceneRenderer,
         nodeFor anchor: ARAnchor
     ) -> SCNNode? {
-        let node = SCNNode()
-        return node
+        return nil
     }
+}
+
+// MARK: - ARSessionDelegate
+
+extension ViewController: ARSessionDelegate {
+    
 }
