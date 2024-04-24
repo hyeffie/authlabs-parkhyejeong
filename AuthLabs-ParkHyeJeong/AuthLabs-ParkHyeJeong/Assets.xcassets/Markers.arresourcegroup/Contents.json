@@ -1,0 +1,14 @@
+{
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "resources" : [
+    {
+      "filename" : "authlabs_logo_door.arreferenceimage"
+    },
+    {
+      "filename" : "QR-github-hyeffie.arreferenceimage"
+    }
+  ]
+}
