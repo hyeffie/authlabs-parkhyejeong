@@ -10,6 +10,8 @@ import SceneKit
 import UIKit
 
 final class ViewController: UIViewController {
+    private lazy var queue = DispatchQueue(label: .init(describing: self))
+    
     // MARK: - Views
     
     private let sceneView: ARSCNView
@@ -27,10 +29,6 @@ final class ViewController: UIViewController {
     }
     
     // MARK: - View Life cycle Methods
-    
-    override func loadView() {
-        super.loadView()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,10 +64,14 @@ private extension ViewController {
                 bundle: nil
             )
         else { return }
-        
+    
         let arConfiguration = ARWorldTrackingConfiguration()
         arConfiguration.detectionImages = referenceImages
-        self.sceneView.session.run(arConfiguration)
+        arConfiguration.maximumNumberOfTrackedImages = 3
+        self.sceneView.session.run(
+            arConfiguration,
+            options: [.resetTracking, .removeExistingAnchors]
+        )
     }
     
     func pauseSceneViewSession() {
@@ -89,9 +91,42 @@ private extension ViewController {
 
 extension ViewController: ARSCNViewDelegate {
     func renderer(
-        _ renderer: SCNSceneRenderer,
-        nodeFor anchor: ARAnchor
-    ) -> SCNNode? {
+        _ renderer: any SCNSceneRenderer,
+        didAdd node: SCNNode,
+        for anchor: ARAnchor
+    ) {
+        let newNode = makeNode(for: anchor) ?? SCNNode()
+        node.addChildNode(newNode)
+    }
+    
+    private func makeInfoNode(for anchor: ARAnchor) -> SCNNode? {
+        if let imageAnchor = anchor as? ARImageAnchor {
+            let nodeSize = imageAnchor.referenceImage.physicalSize
+            let imageName = imageAnchor.name ?? "undefined"
+            let info = ImageMarkerInformation(identifier: imageName)
+            let image = info.toImage(size: nodeSize)
+            let informationNode = ImageNode(image: image, size: nodeSize)
+            return informationNode
+        }
+        return nil
+    }
+    
+    private func makeNode(for anchor: ARAnchor) -> SCNNode? {
+        if
+            let imageAnchor = anchor as? ARImageAnchor
+        {
+            let plane = SCNPlane(
+                width: imageAnchor.referenceImage.physicalSize.width,
+                height: imageAnchor.referenceImage.physicalSize.height
+            )
+            let planeNode = SCNNode(geometry: plane)
+
+            planeNode.opacity = 0.5
+            planeNode.eulerAngles.x = -.pi / 2
+            planeNode.name = imageAnchor.referenceImage.name
+            
+            return planeNode
+        }
         return nil
     }
 }
