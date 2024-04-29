@@ -100,34 +100,14 @@ extension ViewController: ARSCNViewDelegate {
     }
     
     private func makeInfoNode(for anchor: ARAnchor) -> SCNNode? {
-        if let imageAnchor = anchor as? ARImageAnchor {
-            let nodeSizeInMeter = imageAnchor.referenceImage.physicalSize
-            let name = imageAnchor.referenceImage.name ?? "undefined"
-            let info = ImageMarkerInformation(identifier: name)
-            let image = info.toImage(size: nodeSizeInMeter.multiply(10_000))
-            let informationNode = ImageNode(image: image, size: nodeSizeInMeter)
-            return informationNode
-        }
-        return nil
-    }
-    
-    private func makeNode(for anchor: ARAnchor) -> SCNNode? {
-        if
-            let imageAnchor = anchor as? ARImageAnchor
-        {
-            let plane = SCNPlane(
-                width: imageAnchor.referenceImage.physicalSize.width,
-                height: imageAnchor.referenceImage.physicalSize.height
-            )
-            let planeNode = SCNNode(geometry: plane)
-
-            planeNode.opacity = 0.5
-            planeNode.eulerAngles.x = -.pi / 2
-            planeNode.name = imageAnchor.referenceImage.name
-            
-            return planeNode
-        }
-        return nil
+        guard let imageAnchor = anchor as? ARImageAnchor else { return nil }
+        let nodeSizeInMeter = imageAnchor.referenceImage.physicalSize
+        let nodeSizeTemp = nodeSizeInMeter.multiply(10_000) // CGFloat 자리수 조정 (레퍼런스용)
+        let name = imageAnchor.referenceImage.name ?? "undefined"
+        let info = ImageMarkerInformation(identifier: name)
+        let image = info.toImage(ratioReferenceSize: nodeSizeTemp)
+        let informationNode = ImageNode(image: image, size: nodeSizeInMeter)
+        return informationNode
     }
 }
 
@@ -135,23 +115,4 @@ extension ViewController: ARSCNViewDelegate {
 
 extension ViewController: ARSessionDelegate {
     
-}
-
-extension CGSize {
-    func multiply(_ mutiple: CGFloat) -> Self {
-        return .init(
-            width: self.width * mutiple,
-            height: self.height * mutiple
-        )
-    }
-    
-    init(width: CGFloat, ratio: CGFloat) {
-        let height = width * ratio
-        self = .init(width: width, height: height)
-    }
-    
-    init(height: CGFloat, ratio: CGFloat) {
-        let width = height * ratio
-        self = .init(width: width, height: height)
-    }
 }

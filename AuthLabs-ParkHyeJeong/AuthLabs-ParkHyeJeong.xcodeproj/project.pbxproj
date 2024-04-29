@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F423A4DA2BD8DB7300C297EA /* MarkerInformationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F423A4D92BD8DB7300C297EA /* MarkerInformationNode.swift */; };
 		F48C317C2BDE1EB800E8129C /* SCNMaterial+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48C317B2BDE1EB800E8129C /* SCNMaterial+UIImage.swift */; };
 		F48C317E2BDE2B8600E8129C /* ImageMarkerInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48C317D2BDE2B8600E8129C /* ImageMarkerInformation.swift */; };
-		F48C31802BDE2BDB00E8129C /* MarkerInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48C317F2BDE2BDB00E8129C /* MarkerInformationView.swift */; };
 		F48C31822BDE2C0100E8129C /* ImageNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48C31812BDE2C0100E8129C /* ImageNode.swift */; };
+		F48C31842BDF462E00E8129C /* CGSize+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48C31832BDF462E00E8129C /* CGSize+.swift */; };
 		F4D7ABB52BD54B7000B3F462 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D7ABB42BD54B7000B3F462 /* AppDelegate.swift */; };
 		F4D7ABB72BD54B7000B3F462 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = F4D7ABB62BD54B7000B3F462 /* art.scnassets */; };
 		F4D7ABB92BD54B7000B3F462 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D7ABB82BD54B7000B3F462 /* ViewController.swift */; };
@@ -20,11 +19,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F423A4D92BD8DB7300C297EA /* MarkerInformationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerInformationNode.swift; sourceTree = "<group>"; };
 		F48C317B2BDE1EB800E8129C /* SCNMaterial+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNMaterial+UIImage.swift"; sourceTree = "<group>"; };
 		F48C317D2BDE2B8600E8129C /* ImageMarkerInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMarkerInformation.swift; sourceTree = "<group>"; };
-		F48C317F2BDE2BDB00E8129C /* MarkerInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerInformationView.swift; sourceTree = "<group>"; };
 		F48C31812BDE2C0100E8129C /* ImageNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNode.swift; sourceTree = "<group>"; };
+		F48C31832BDF462E00E8129C /* CGSize+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+.swift"; sourceTree = "<group>"; };
 		F4D7ABB12BD54B7000B3F462 /* AuthLabs-ParkHyeJeong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AuthLabs-ParkHyeJeong.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4D7ABB42BD54B7000B3F462 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4D7ABB62BD54B7000B3F462 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -68,11 +66,10 @@
 				F4D7ABBD2BD54B7100B3F462 /* Assets.xcassets */,
 				F4D7ABB62BD54B7000B3F462 /* art.scnassets */,
 				F4D7ABBF2BD54B7100B3F462 /* LaunchScreen.storyboard */,
-				F423A4D92BD8DB7300C297EA /* MarkerInformationNode.swift */,
-				F48C317F2BDE2BDB00E8129C /* MarkerInformationView.swift */,
 				F48C31812BDE2C0100E8129C /* ImageNode.swift */,
 				F48C317D2BDE2B8600E8129C /* ImageMarkerInformation.swift */,
 				F48C317B2BDE1EB800E8129C /* SCNMaterial+UIImage.swift */,
+				F48C31832BDF462E00E8129C /* CGSize+.swift */,
 			);
 			path = "AuthLabs-ParkHyeJeong";
 			sourceTree = "<group>";
@@ -148,10 +145,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F48C31842BDF462E00E8129C /* CGSize+.swift in Sources */,
 				F48C31822BDE2C0100E8129C /* ImageNode.swift in Sources */,
 				F4D7ABB92BD54B7000B3F462 /* ViewController.swift in Sources */,
-				F48C31802BDE2BDB00E8129C /* MarkerInformationView.swift in Sources */,
-				F423A4DA2BD8DB7300C297EA /* MarkerInformationNode.swift in Sources */,
 				F4D7ABB52BD54B7000B3F462 /* AppDelegate.swift in Sources */,
 				F48C317C2BDE1EB800E8129C /* SCNMaterial+UIImage.swift in Sources */,
 				F48C317E2BDE2B8600E8129C /* ImageMarkerInformation.swift in Sources */,

@@ -30,14 +30,15 @@ struct ImageMarkerInformation {
 import UIKit
 
 extension ImageMarkerInformation {
-    func toImage(size: CGSize) -> UIImage {
-        let text = " \(self.name ?? "name is blank") "
-        
+    private var nodeText: String {
+        return " \(self.name ?? "name is blank") "
+    }
+    
+    func toImage(ratioReferenceSize size: CGSize) -> UIImage {
         let textSize: CGFloat = 50
         let lineNumber: Int = 20
         let boardHeight = CGFloat(lineNumber) * textSize
-        let boardRatio = size.width / size.height
-        let boardSize = CGSize(height: boardHeight, ratio: boardRatio)
+        let boardSize = CGSize(height: boardHeight, ratioReferenceSize: size)
         let rect = CGRect(origin: .zero, size: boardSize)
         
         let renderer = UIGraphicsImageRenderer(size: boardSize)
@@ -57,7 +58,7 @@ extension ImageMarkerInformation {
             ]
             
             let attributedText = NSAttributedString(
-                string: text,
+                string: self.nodeText,
                 attributes: attributes
             )
             

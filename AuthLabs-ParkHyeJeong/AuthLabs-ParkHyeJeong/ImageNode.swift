@@ -7,13 +7,7 @@
 
 import SceneKit
 
-class PositionableNode: SCNNode {
-    func setPosition(x: Float, y: Float, z: Float) {
-        self.worldPosition = .init(x: x, y: y, z: z)
-    }
-}
-
-class ImageNode: PositionableNode {
+final class ImageNode: SCNNode {
     init(image: UIImage, size: CGSize) {
         super.init()
         set(image: image, size: size)
