@@ -14,12 +14,13 @@ final class ViewController: UIViewController {
     
     // MARK: - Views
     
-    private let sceneView: ARSCNView
+    private var sceneView: ARSCNView!
+    
+    private let imageCountButton = MarkerSelectorButton()
     
     // MARK: - Initializers
     
     init() {
-        self.sceneView = .init()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -33,13 +34,14 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setSceneView()
+        setLayout()
+        setButton()
         setIdleTimerAbility()
         runSceneViewSession()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         pauseSceneViewSession()
     }
     
@@ -50,10 +52,9 @@ final class ViewController: UIViewController {
 
 private extension ViewController {
     func setSceneView() {
-        self.view = self.sceneView
+        self.sceneView = .init(frame: self.view.frame)
         self.sceneView.delegate = self
         self.sceneView.session.delegate = self
-        self.sceneView.showsStatistics = true
     }
     
     func runSceneViewSession() {
@@ -84,6 +85,44 @@ private extension ViewController {
     
     func resetIdleTimerAbility() {
         UIApplication.shared.isIdleTimerDisabled = false
+    }
+    
+    func setLayout() {
+        self.sceneView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.sceneView)
+        
+        NSLayoutConstraint.activate([
+            self.sceneView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.sceneView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            self.sceneView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.sceneView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+        ])
+            
+        self.imageCountButton.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.imageCountButton)
+        
+        NSLayoutConstraint.activate([
+//            self.imageCountButton.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor),
+//            self.imageCountButton.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor),
+            
+            self.imageCountButton.topAnchor.constraint(
+                equalTo: self.view.safeAreaLayoutGuide.topAnchor,
+                constant: 15
+            ),
+            self.imageCountButton.trailingAnchor.constraint(
+                equalTo: self.view.safeAreaLayoutGuide.trailingAnchor,
+                constant: -15
+            )
+        ])
+    }
+    
+    func setButton() {
+        self.imageCountButton.configure(with: 10)
+        let action = UIAction { action in
+            let randomNumber = (0...20).randomElement() ?? 0
+            self.imageCountButton.configure(with: randomNumber)
+        }
+        self.imageCountButton.setAction(action)
     }
 }
 
