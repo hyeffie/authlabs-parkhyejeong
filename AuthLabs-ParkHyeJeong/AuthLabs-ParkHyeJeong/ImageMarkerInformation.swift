@@ -30,55 +30,44 @@ struct ImageMarkerInformation {
 import UIKit
 
 extension ImageMarkerInformation {
-    func toImage(size imageSize: CGSize) -> UIImage {
-//        let renderer = UIGraphicsImageRenderer(size: size)
-//        let image = renderer.image { context in
-//            let rect = CGRect(origin: .zero, size: size)
-//            
-//            let backgroundColor = UIColor.white.withAlphaComponent(0.5)
-//            backgroundColor.setFill()
-//            context.fill(rect)
-//            
-//            let paragraphStyle = NSMutableParagraphStyle()
-//            paragraphStyle.alignment = .center
-//            paragraphStyle.lineBreakMode = .byWordWrapping
-//            
-//            let attributes: [NSAttributedString.Key: Any] = [
-//                .foregroundColor: UIColor.label,
-//                .backgroundColor: UIColor.white,
-//                .font: UIFont.systemFont(ofSize: 30),
-//                .paragraphStyle: paragraphStyle,
-//            ]
-//            
-//            let attributedText = NSAttributedString(
-//                string: self.name ?? "",
-//                attributes: attributes
-//            )
-//            attributedText.draw(
-//                with: rect,
-//                options: .usesLineFragmentOrigin,
-//                context: nil
-//            )
-//        }
-//        return image
+    func toImage(size: CGSize) -> UIImage {
+        let text = " \(self.name ?? "name is blank") "
         
-        let renderer = UIGraphicsImageRenderer(size: imageSize)
+        let textSize: CGFloat = 50
+        let lineNumber: Int = 20
+        let boardHeight = CGFloat(lineNumber) * textSize
+        let boardRatio = size.width / size.height
+        let boardSize = CGSize(height: boardHeight, ratio: boardRatio)
+        let rect = CGRect(origin: .zero, size: boardSize)
+        
+        let renderer = UIGraphicsImageRenderer(size: boardSize)
         let image = renderer.image { context in
-            UIColor.white.setFill()
-            context.fill(CGRect(x: 0, y: 0, width: imageSize.width, height: imageSize.height))
+            let backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            backgroundColor.setFill()
+            context.fill(rect)
             
             let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = .left
+            paragraphStyle.alignment = .center
             paragraphStyle.lineBreakMode = .byWordWrapping
             
             let attributes: [NSAttributedString.Key: Any] = [
-                .font: UIFont.systemFont(ofSize: 30),
-                .paragraphStyle: paragraphStyle
+                .backgroundColor: UIColor.white,
+                .font: UIFont.systemFont(ofSize: textSize),
+                .paragraphStyle: paragraphStyle,
             ]
             
-            let name = self.name ?? ""
-            let attributedText = NSAttributedString(string: name, attributes: attributes)
-            attributedText.draw(with: CGRect(x: 0, y: 0, width: imageSize.width, height: imageSize.height), options: .usesLineFragmentOrigin, context: nil)
+            let attributedText = NSAttributedString(
+                string: text,
+                attributes: attributes
+            )
+            
+            let textColor = UIColor.label
+            textColor.setFill()
+            attributedText.draw(
+                with: rect,
+                options: .usesLineFragmentOrigin,
+                context: nil
+            )
         }
         return image
     }

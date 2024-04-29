@@ -95,17 +95,17 @@ extension ViewController: ARSCNViewDelegate {
         didAdd node: SCNNode,
         for anchor: ARAnchor
     ) {
-        let newNode = makeNode(for: anchor) ?? SCNNode()
+        let newNode = makeInfoNode(for: anchor) ?? SCNNode()
         node.addChildNode(newNode)
     }
     
     private func makeInfoNode(for anchor: ARAnchor) -> SCNNode? {
         if let imageAnchor = anchor as? ARImageAnchor {
-            let nodeSize = imageAnchor.referenceImage.physicalSize
-            let imageName = imageAnchor.name ?? "undefined"
-            let info = ImageMarkerInformation(identifier: imageName)
-            let image = info.toImage(size: nodeSize)
-            let informationNode = ImageNode(image: image, size: nodeSize)
+            let nodeSizeInMeter = imageAnchor.referenceImage.physicalSize
+            let name = imageAnchor.referenceImage.name ?? "undefined"
+            let info = ImageMarkerInformation(identifier: name)
+            let image = info.toImage(size: nodeSizeInMeter.multiply(10_000))
+            let informationNode = ImageNode(image: image, size: nodeSizeInMeter)
             return informationNode
         }
         return nil
@@ -135,4 +135,23 @@ extension ViewController: ARSCNViewDelegate {
 
 extension ViewController: ARSessionDelegate {
     
+}
+
+extension CGSize {
+    func multiply(_ mutiple: CGFloat) -> Self {
+        return .init(
+            width: self.width * mutiple,
+            height: self.height * mutiple
+        )
+    }
+    
+    init(width: CGFloat, ratio: CGFloat) {
+        let height = width * ratio
+        self = .init(width: width, height: height)
+    }
+    
+    init(height: CGFloat, ratio: CGFloat) {
+        let width = height * ratio
+        self = .init(width: width, height: height)
+    }
 }

@@ -25,8 +25,9 @@ class ImageNode: PositionableNode {
     }
     
     private func set(image: UIImage, size: CGSize) {
-        self.geometry = SCNPlane(width: size.width, height: size.height)
-        self.geometry?.materials = [SCNMaterial(image: image)]
+        let plane = SCNPlane(width: size.width, height: size.height)
+        plane.firstMaterial?.diffuse.contents = image
+        self.geometry = plane
         self.eulerAngles.x = -.pi / 2
         self.opacity = 1
     }
