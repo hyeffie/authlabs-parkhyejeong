@@ -145,37 +145,12 @@ final class MarkerSelectionViewController: UIViewController {
                 return
             }
             _ = provider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
-                if let error {
-                    return
-                }
-                guard let image = image as? UIImage else {
-                    return
-                }
+                if let error { return }
+                guard let image = image as? UIImage else { return }
                 let loadedImage = LoadedImage(image: image, identifier: identifier)
                 self?.loadedImages.append(loadedImage)
             }
         }
-    }
-    
-    private func updateCollectionView() {
-        let imageNames = [
-            "imac-21",
-            "macbookpro-13",
-            "QR-github-hyeffie",
-        ]
-        
-        var snapshot = SelectedImageListSnapShot()
-        snapshot.appendSections([.image])
-        let items = imageNames.map { name in
-            let image = UIImage(named: name)!
-            let loadedImage = LoadedImage(image: image, identifier: name)
-            return SelectedImageListItem.image(loadedImage)
-        }
-        snapshot.appendItems(items, toSection: .image)
-        
-        self.imageCollectionDataSource.apply(snapshot)
-        
-        self.listState = items.isEmpty ? .noSelectedImage : .noProblem
     }
     
     private func updateCollection() {
@@ -214,12 +189,7 @@ extension MarkerSelectionViewController: PHPickerViewControllerDelegate {
             let identifier = result.assetIdentifier!
             newSelection[identifier] = existingSelection[identifier] ?? result
         }
-        
-        // Track the selection in case the user deselects it later.
         selection = newSelection
-        
-//        selectedAssetIdentifiers = results.map(\.assetIdentifier!)
-//        selectedAssetIdentifierIterator = selectedAssetIdentifiers.makeIterator()
     }
     
     private func presentPicker() {
@@ -228,7 +198,6 @@ extension MarkerSelectionViewController: PHPickerViewControllerDelegate {
         configuration.preferredAssetRepresentationMode = .current
         configuration.selection = .ordered
         configuration.selectionLimit = 3
-//        configuration.preselectedAssetIdentifiers = selectedAssetIdentifiers
         let picker = PHPickerViewController(configuration: configuration)
         picker.delegate = self
         if self.loadedImages.isEmpty == false {
