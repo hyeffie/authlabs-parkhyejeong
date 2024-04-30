@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F40A10FB2BE0BB4200F9FFC0 /* LoadedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40A10FA2BE0BB4200F9FFC0 /* LoadedImage.swift */; };
+		F40A11072BE1229A00F9FFC0 /* ImageMarkerInformation+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40A11062BE1229A00F9FFC0 /* ImageMarkerInformation+UIImage.swift */; };
 		F48C317C2BDE1EB800E8129C /* SCNMaterial+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48C317B2BDE1EB800E8129C /* SCNMaterial+UIImage.swift */; };
 		F48C317E2BDE2B8600E8129C /* ImageMarkerInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48C317D2BDE2B8600E8129C /* ImageMarkerInformation.swift */; };
 		F48C31822BDE2C0100E8129C /* ImageNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48C31812BDE2C0100E8129C /* ImageNode.swift */; };
@@ -22,14 +23,14 @@
 		F48C31982BDFBB5700E8129C /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48C31972BDFBB5700E8129C /* InputView.swift */; };
 		F48C319A2BDFBE2500E8129C /* MarkerImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48C31992BDFBE2500E8129C /* MarkerImage.swift */; };
 		F4D7ABB52BD54B7000B3F462 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D7ABB42BD54B7000B3F462 /* AppDelegate.swift */; };
-		F4D7ABB72BD54B7000B3F462 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = F4D7ABB62BD54B7000B3F462 /* art.scnassets */; };
-		F4D7ABB92BD54B7000B3F462 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D7ABB82BD54B7000B3F462 /* ViewController.swift */; };
+		F4D7ABB92BD54B7000B3F462 /* ImageDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D7ABB82BD54B7000B3F462 /* ImageDetectionViewController.swift */; };
 		F4D7ABBE2BD54B7100B3F462 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4D7ABBD2BD54B7100B3F462 /* Assets.xcassets */; };
 		F4D7ABC12BD54B7100B3F462 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = F4D7ABC02BD54B7100B3F462 /* Base */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F40A10FA2BE0BB4200F9FFC0 /* LoadedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadedImage.swift; sourceTree = "<group>"; };
+		F40A11062BE1229A00F9FFC0 /* ImageMarkerInformation+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageMarkerInformation+UIImage.swift"; sourceTree = "<group>"; };
 		F48C317B2BDE1EB800E8129C /* SCNMaterial+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNMaterial+UIImage.swift"; sourceTree = "<group>"; };
 		F48C317D2BDE2B8600E8129C /* ImageMarkerInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMarkerInformation.swift; sourceTree = "<group>"; };
 		F48C31812BDE2C0100E8129C /* ImageNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNode.swift; sourceTree = "<group>"; };
@@ -45,8 +46,7 @@
 		F48C31992BDFBE2500E8129C /* MarkerImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerImage.swift; sourceTree = "<group>"; };
 		F4D7ABB12BD54B7000B3F462 /* AuthLabs-ParkHyeJeong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AuthLabs-ParkHyeJeong.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4D7ABB42BD54B7000B3F462 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F4D7ABB62BD54B7000B3F462 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		F4D7ABB82BD54B7000B3F462 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F4D7ABB82BD54B7000B3F462 /* ImageDetectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetectionViewController.swift; sourceTree = "<group>"; };
 		F4D7ABBD2BD54B7100B3F462 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4D7ABC02BD54B7100B3F462 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -62,6 +62,123 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F40A10FC2BE1210C00F9FFC0 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				F48C31852BDF48B900E8129C /* MarkerSelectorButton.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		F40A10FD2BE1211800F9FFC0 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F48C318B2BDF7F5900E8129C /* MarkerSelectionViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		F40A10FE2BE1212700F9FFC0 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				F48C31932BDFB73400E8129C /* ImageCollectionView.swift */,
+				F48C31952BDFB9EF00E8129C /* SelectedImageListDataSource.swift */,
+				F48C31912BDFB55E00E8129C /* SelectedImageCell.swift */,
+				F48C31972BDFBB5700E8129C /* InputView.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		F40A10FF2BE1213700F9FFC0 /* MarkerSelection */ = {
+			isa = PBXGroup;
+			children = (
+				F40A11022BE1222500F9FFC0 /* View */,
+			);
+			path = MarkerSelection;
+			sourceTree = "<group>";
+		};
+		F40A11002BE121AF00F9FFC0 /* ImageDetection */ = {
+			isa = PBXGroup;
+			children = (
+				F40A11082BE122C700F9FFC0 /* ARKit+SceneKit */,
+				F40A11032BE1223300F9FFC0 /* View */,
+			);
+			path = ImageDetection;
+			sourceTree = "<group>";
+		};
+		F40A11012BE1221500F9FFC0 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F4D7ABB82BD54B7000B3F462 /* ImageDetectionViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		F40A11022BE1222500F9FFC0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F40A10FD2BE1211800F9FFC0 /* ViewController */,
+				F40A10FE2BE1212700F9FFC0 /* Component */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F40A11032BE1223300F9FFC0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F40A11012BE1221500F9FFC0 /* ViewController */,
+				F40A10FC2BE1210C00F9FFC0 /* Component */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F40A11042BE1226800F9FFC0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F48C317D2BDE2B8600E8129C /* ImageMarkerInformation.swift */,
+				F40A11062BE1229A00F9FFC0 /* ImageMarkerInformation+UIImage.swift */,
+				F48C31992BDFBE2500E8129C /* MarkerImage.swift */,
+				F40A10FA2BE0BB4200F9FFC0 /* LoadedImage.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F40A11052BE1227000F9FFC0 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				F48C318D2BDFB4CA00E8129C /* ReusableCell.swift */,
+				F48C31832BDF462E00E8129C /* CGSize+.swift */,
+				F48C318F2BDFB4E500E8129C /* UICollectionView+.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		F40A11082BE122C700F9FFC0 /* ARKit+SceneKit */ = {
+			isa = PBXGroup;
+			children = (
+				F48C31812BDE2C0100E8129C /* ImageNode.swift */,
+				F48C317B2BDE1EB800E8129C /* SCNMaterial+UIImage.swift */,
+			);
+			path = "ARKit+SceneKit";
+			sourceTree = "<group>";
+		};
+		F40A11092BE123A600F9FFC0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F4D7ABBD2BD54B7100B3F462 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F40A110A2BE123AF00F9FFC0 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				F4D7ABB42BD54B7000B3F462 /* AppDelegate.swift */,
+				F4D7ABBF2BD54B7100B3F462 /* LaunchScreen.storyboard */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		F4D7ABA82BD54B7000B3F462 = {
 			isa = PBXGroup;
 			children = (
@@ -81,25 +198,12 @@
 		F4D7ABB32BD54B7000B3F462 /* AuthLabs-ParkHyeJeong */ = {
 			isa = PBXGroup;
 			children = (
-				F4D7ABB42BD54B7000B3F462 /* AppDelegate.swift */,
-				F4D7ABB82BD54B7000B3F462 /* ViewController.swift */,
-				F4D7ABBD2BD54B7100B3F462 /* Assets.xcassets */,
-				F4D7ABB62BD54B7000B3F462 /* art.scnassets */,
-				F4D7ABBF2BD54B7100B3F462 /* LaunchScreen.storyboard */,
-				F48C31812BDE2C0100E8129C /* ImageNode.swift */,
-				F48C317D2BDE2B8600E8129C /* ImageMarkerInformation.swift */,
-				F48C317B2BDE1EB800E8129C /* SCNMaterial+UIImage.swift */,
-				F48C31832BDF462E00E8129C /* CGSize+.swift */,
-				F48C31852BDF48B900E8129C /* MarkerSelectorButton.swift */,
-				F48C318B2BDF7F5900E8129C /* MarkerSelectionViewController.swift */,
-				F48C31932BDFB73400E8129C /* ImageCollectionView.swift */,
-				F48C31912BDFB55E00E8129C /* SelectedImageCell.swift */,
-				F48C31952BDFB9EF00E8129C /* SelectedImageListDataSource.swift */,
-				F48C318D2BDFB4CA00E8129C /* ReusableCell.swift */,
-				F48C318F2BDFB4E500E8129C /* UICollectionView+.swift */,
-				F48C31972BDFBB5700E8129C /* InputView.swift */,
-				F48C31992BDFBE2500E8129C /* MarkerImage.swift */,
-				F40A10FA2BE0BB4200F9FFC0 /* LoadedImage.swift */,
+				F40A110A2BE123AF00F9FFC0 /* App */,
+				F40A11092BE123A600F9FFC0 /* Resources */,
+				F40A11002BE121AF00F9FFC0 /* ImageDetection */,
+				F40A10FF2BE1213700F9FFC0 /* MarkerSelection */,
+				F40A11052BE1227000F9FFC0 /* Common */,
+				F40A11042BE1226800F9FFC0 /* Model */,
 			);
 			path = "AuthLabs-ParkHyeJeong";
 			sourceTree = "<group>";
@@ -162,7 +266,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4D7ABB72BD54B7000B3F462 /* art.scnassets in Resources */,
 				F4D7ABBE2BD54B7100B3F462 /* Assets.xcassets in Resources */,
 				F4D7ABC12BD54B7100B3F462 /* Base in Resources */,
 			);
@@ -179,8 +282,9 @@
 				F48C31982BDFBB5700E8129C /* InputView.swift in Sources */,
 				F48C319A2BDFBE2500E8129C /* MarkerImage.swift in Sources */,
 				F48C31822BDE2C0100E8129C /* ImageNode.swift in Sources */,
-				F4D7ABB92BD54B7000B3F462 /* ViewController.swift in Sources */,
+				F4D7ABB92BD54B7000B3F462 /* ImageDetectionViewController.swift in Sources */,
 				F4D7ABB52BD54B7000B3F462 /* AppDelegate.swift in Sources */,
+				F40A11072BE1229A00F9FFC0 /* ImageMarkerInformation+UIImage.swift in Sources */,
 				F48C31902BDFB4E500E8129C /* UICollectionView+.swift in Sources */,
 				F48C317C2BDE1EB800E8129C /* SCNMaterial+UIImage.swift in Sources */,
 				F48C31922BDFB55E00E8129C /* SelectedImageCell.swift in Sources */,

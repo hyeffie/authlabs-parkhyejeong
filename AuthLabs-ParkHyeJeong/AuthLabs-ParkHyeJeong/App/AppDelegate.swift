@@ -27,7 +27,7 @@ private extension AppDelegate {
     }
     
     func setRootDestination() {
-        let rootViewController = ViewController()
+        let rootViewController = ImageDetectionViewController()
         self.window?.rootViewController = rootViewController
         self.window?.makeKeyAndVisible()
     }
