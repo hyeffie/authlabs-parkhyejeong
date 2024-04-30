@@ -35,8 +35,8 @@ final class SelectedImageCell: UICollectionViewCell {
         ])
     }
     
-    func configure(with imageData: Data) {
-        self.imageView.image = UIImage(data: imageData)
+    func configure(with image: UIImage) {
+        self.imageView.image = image
     }
 }
 

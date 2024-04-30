@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PhotosUI
 
 final class MarkerSelectionViewController: UIViewController {
     enum ListState {
@@ -13,13 +14,31 @@ final class MarkerSelectionViewController: UIViewController {
         case noProblem
     }
     
-    private var currentImageID: Int?
+    private var currentImage: MarkerImage? {
+        didSet {
+            configureFields(with: self.currentImage)
+        }
+    }
+    
+    private var selection = [String: PHPickerResult]() {
+        didSet {
+            updateLoadedImages()
+        }
+    }
+    
+    private var loadedImages: [LoadedImage] = [] {
+        didSet {
+            updateCollection()
+        }
+    }
     
     private var listState: ListState = .noSelectedImage {
         didSet {
             updateListState()
         }
     }
+    
+    private var imagePicker: PHPickerViewController?
     
     private lazy var imageCollectionDataSource = SelectedImageListDataSource(self.collectionView)
     
@@ -46,6 +65,19 @@ final class MarkerSelectionViewController: UIViewController {
         return stack
     }()
     
+    private lazy var noSelectedImageConfiguration: UIContentUnavailableConfiguration = {
+        var config = UIContentUnavailableConfiguration.empty()
+        config.text = "선택된 이미지 없음"
+        config.secondaryText = "사진 라이브러리에서 마커로 사용할 이미지를 선택해주세요."
+        var buttonConfig = UIButton.Configuration.filled()
+        buttonConfig.title = "사진 선택"
+        config.button = buttonConfig
+        config.buttonProperties.primaryAction = UIAction { _ in
+            self.presentPicker()
+        }
+        return config
+    }()
+    
     init() {
         super.init(nibName: nil, bundle: nil)
     }
@@ -58,7 +90,7 @@ final class MarkerSelectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
-        updateCollectionView()
+        updateCollection()
     }
     
     override func updateContentUnavailableConfiguration(
@@ -68,7 +100,8 @@ final class MarkerSelectionViewController: UIViewController {
             guard let self else { return }
             switch self.listState {
             case .noSelectedImage:
-                self.contentUnavailableConfiguration = ImageCollectionContentUnavailableConfiguration.noSelectedImage
+                let config = self.noSelectedImageConfiguration
+                self.contentUnavailableConfiguration = config
             case .noProblem:
                 self.contentUnavailableConfiguration = nil
             }
@@ -96,22 +129,48 @@ final class MarkerSelectionViewController: UIViewController {
         ])
     }
     
-    private func configureFields(with marker: MarkerImage) {
+    private func configureFields(with marker: MarkerImage?) {
+        guard let marker else {
+            return
+        }
         self.nameField.configure(with: marker.name)
         self.definitionField.configure(with: marker.definition)
         self.descriptionField.configure(with: marker.description)
     }
     
+    private func updateLoadedImages() {
+        self.selection.forEach { (identifier, result) in
+            let provider = result.itemProvider
+            guard provider.canLoadObject(ofClass: UIImage.self) else {
+                return
+            }
+            _ = provider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
+                if let error {
+                    return
+                }
+                guard let image = image as? UIImage else {
+                    return
+                }
+                let loadedImage = LoadedImage(image: image, identifier: identifier)
+                self?.loadedImages.append(loadedImage)
+            }
+        }
+    }
+    
     private func updateCollectionView() {
-        let dataArr = [
+        let imageNames = [
             "imac-21",
             "macbookpro-13",
             "QR-github-hyeffie",
-        ].map { name in UIImage(named: name)!.pngData()! }
+        ]
         
         var snapshot = SelectedImageListSnapShot()
         snapshot.appendSections([.image])
-        let items = dataArr.map { data in SelectedImageListItem.image(imageData: data) }
+        let items = imageNames.map { name in
+            let image = UIImage(named: name)!
+            let loadedImage = LoadedImage(image: image, identifier: name)
+            return SelectedImageListItem.image(loadedImage)
+        }
         snapshot.appendItems(items, toSection: .image)
         
         self.imageCollectionDataSource.apply(snapshot)
@@ -119,8 +178,62 @@ final class MarkerSelectionViewController: UIViewController {
         self.listState = items.isEmpty ? .noSelectedImage : .noProblem
     }
     
+    private func updateCollection() {
+        var snapshot = SelectedImageListSnapShot()
+        snapshot.appendSections([.image])
+        
+        let items = self.loadedImages.map { SelectedImageListItem.image($0) }
+        snapshot.appendItems(items, toSection: .image)
+        self.imageCollectionDataSource.apply(snapshot)
+        
+        self.listState = items.isEmpty ? .noSelectedImage : .noProblem
+    }
+    
     private func updateListState() {
-        setNeedsUpdateContentUnavailableConfiguration()
-        self.fieldStack.isHidden = self.listState == .noSelectedImage
+        Task {
+            await MainActor.run {
+                setNeedsUpdateContentUnavailableConfiguration()
+                self.fieldStack.isHidden = self.listState == .noSelectedImage
+            }
+        }
+    }
+}
+
+// MARK: - PHPickerViewControllerDelegate Implements
+
+extension MarkerSelectionViewController: PHPickerViewControllerDelegate {
+    func picker(
+        _ picker: PHPickerViewController, 
+        didFinishPicking results: [PHPickerResult]
+    ) {
+        dismiss(animated: true)
+        
+        let existingSelection = self.selection
+        var newSelection = [String: PHPickerResult]()
+        for result in results {
+            let identifier = result.assetIdentifier!
+            newSelection[identifier] = existingSelection[identifier] ?? result
+        }
+        
+        // Track the selection in case the user deselects it later.
+        selection = newSelection
+        
+//        selectedAssetIdentifiers = results.map(\.assetIdentifier!)
+//        selectedAssetIdentifierIterator = selectedAssetIdentifiers.makeIterator()
+    }
+    
+    private func presentPicker() {
+        var configuration = PHPickerConfiguration(photoLibrary: .shared())
+        configuration.filter = .images
+        configuration.preferredAssetRepresentationMode = .current
+        configuration.selection = .ordered
+        configuration.selectionLimit = 3
+//        configuration.preselectedAssetIdentifiers = selectedAssetIdentifiers
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        if self.loadedImages.isEmpty == false {
+            loadedImages.removeAll()
+        }
+        present(picker, animated: true)
     }
 }

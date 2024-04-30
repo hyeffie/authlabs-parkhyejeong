@@ -12,7 +12,7 @@ enum SelectedImageListSection {
 }
 
 enum SelectedImageListItem: Hashable {
-    case image(imageData: Data)
+    case image(LoadedImage)
 }
 
 typealias SelectedImageListSnapShot = NSDiffableDataSourceSnapshot<SelectedImageListSection, SelectedImageListItem>
@@ -23,12 +23,12 @@ final class SelectedImageListDataSource: UICollectionViewDiffableDataSource<Sele
     
     static let cellProvider: CellProvider = { collectionView, indexPath, itemIdentifier in
         switch itemIdentifier {
-        case .image(let data):
+        case .image(let loadedImage):
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: ImageCell.reuseIdentifier,
                 for: indexPath
             ) as? ImageCell else { return UICollectionViewCell() }
-            cell.configure(with: data)
+            cell.configure(with: loadedImage.image)
             return cell
         }
     }
