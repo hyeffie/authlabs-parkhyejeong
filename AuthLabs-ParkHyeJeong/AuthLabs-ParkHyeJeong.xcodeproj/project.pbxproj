@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F40A10F92BE0870600F9FFC0 /* ImageCollectionContentUnavailableConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40A10F82BE0870600F9FFC0 /* ImageCollectionContentUnavailableConfiguration.swift */; };
 		F48C317C2BDE1EB800E8129C /* SCNMaterial+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48C317B2BDE1EB800E8129C /* SCNMaterial+UIImage.swift */; };
 		F48C317E2BDE2B8600E8129C /* ImageMarkerInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48C317D2BDE2B8600E8129C /* ImageMarkerInformation.swift */; };
 		F48C31822BDE2C0100E8129C /* ImageNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48C31812BDE2C0100E8129C /* ImageNode.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F40A10F82BE0870600F9FFC0 /* ImageCollectionContentUnavailableConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionContentUnavailableConfiguration.swift; sourceTree = "<group>"; };
 		F48C317B2BDE1EB800E8129C /* SCNMaterial+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNMaterial+UIImage.swift"; sourceTree = "<group>"; };
 		F48C317D2BDE2B8600E8129C /* ImageMarkerInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMarkerInformation.swift; sourceTree = "<group>"; };
 		F48C31812BDE2C0100E8129C /* ImageNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNode.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				F48C31832BDF462E00E8129C /* CGSize+.swift */,
 				F48C31852BDF48B900E8129C /* MarkerSelectorButton.swift */,
 				F48C318B2BDF7F5900E8129C /* MarkerSelectionViewController.swift */,
+				F40A10F82BE0870600F9FFC0 /* ImageCollectionContentUnavailableConfiguration.swift */,
 				F48C31932BDFB73400E8129C /* ImageCollectionView.swift */,
 				F48C31912BDFB55E00E8129C /* SelectedImageCell.swift */,
 				F48C31952BDFB9EF00E8129C /* SelectedImageListDataSource.swift */,
@@ -177,6 +180,7 @@
 				F48C319A2BDFBE2500E8129C /* MarkerImage.swift in Sources */,
 				F48C31822BDE2C0100E8129C /* ImageNode.swift in Sources */,
 				F4D7ABB92BD54B7000B3F462 /* ViewController.swift in Sources */,
+				F40A10F92BE0870600F9FFC0 /* ImageCollectionContentUnavailableConfiguration.swift in Sources */,
 				F4D7ABB52BD54B7000B3F462 /* AppDelegate.swift in Sources */,
 				F48C31902BDFB4E500E8129C /* UICollectionView+.swift in Sources */,
 				F48C317C2BDE1EB800E8129C /* SCNMaterial+UIImage.swift in Sources */,

@@ -8,10 +8,20 @@
 import UIKit
 
 final class MarkerSelectionViewController: UIViewController {
+    enum ListState {
+        case noSelectedImage
+        case noProblem
+    }
     
     private var currentImageID: Int?
     
-    private lazy var imageCollectionDataSource: SelectedImageListDataSource = .init(self.collectionView)
+    private var listState: ListState = .noSelectedImage {
+        didSet {
+            updateListState()
+        }
+    }
+    
+    private lazy var imageCollectionDataSource = SelectedImageListDataSource(self.collectionView)
     
     private let collectionView: ImageCollectionView = {
         let collectionView = ImageCollectionView()
@@ -49,6 +59,20 @@ final class MarkerSelectionViewController: UIViewController {
         super.viewDidLoad()
         setView()
         updateCollectionView()
+    }
+    
+    override func updateContentUnavailableConfiguration(
+        using state: UIContentUnavailableConfigurationState
+    ) {
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self else { return }
+            switch self.listState {
+            case .noSelectedImage:
+                self.contentUnavailableConfiguration = ImageCollectionContentUnavailableConfiguration.noSelectedImage
+            case .noProblem:
+                self.contentUnavailableConfiguration = nil
+            }
+        }
     }
     
     private func setView() {
@@ -91,5 +115,12 @@ final class MarkerSelectionViewController: UIViewController {
         snapshot.appendItems(items, toSection: .image)
         
         self.imageCollectionDataSource.apply(snapshot)
+        
+        self.listState = items.isEmpty ? .noSelectedImage : .noProblem
+    }
+    
+    private func updateListState() {
+        setNeedsUpdateContentUnavailableConfiguration()
+        self.fieldStack.isHidden = self.listState == .noSelectedImage
     }
 }
