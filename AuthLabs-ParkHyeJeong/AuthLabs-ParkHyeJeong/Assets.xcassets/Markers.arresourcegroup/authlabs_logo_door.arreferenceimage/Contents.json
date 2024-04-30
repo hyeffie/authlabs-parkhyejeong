@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "authlabs_logo_door.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "width" : 560
+  }
+}
