@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ImageDetectionViewController.swift
 //  AuthLabs-ParkHyeJeong
 //
 //  Created by Effie on 4/21/24.
@@ -9,7 +9,7 @@ import ARKit
 import SceneKit
 import UIKit
 
-final class ViewController: UIViewController {
+final class ImageDetectionViewController: UIViewController {
     private lazy var queue = DispatchQueue(label: .init(describing: self))
     
     // MARK: - Views
@@ -50,7 +50,7 @@ final class ViewController: UIViewController {
     }
 }
 
-private extension ViewController {
+private extension ImageDetectionViewController {
     func setSceneView() {
         self.sceneView = .init(frame: self.view.frame)
         self.sceneView.delegate = self
@@ -134,7 +134,7 @@ private extension ViewController {
 
 // MARK: - ARSCNViewDelegate
 
-extension ViewController: ARSCNViewDelegate {
+extension ImageDetectionViewController: ARSCNViewDelegate {
     func renderer(
         _ renderer: any SCNSceneRenderer,
         didAdd node: SCNNode,
@@ -158,6 +158,6 @@ extension ViewController: ARSCNViewDelegate {
 
 // MARK: - ARSessionDelegate
 
-extension ViewController: ARSessionDelegate {
+extension ImageDetectionViewController: ARSessionDelegate {
     
 }
