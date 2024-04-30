@@ -6,6 +6,11 @@
 
 *각 ARSession 에 선택한 마커를 반영하는 기능은 미구현 상태입니다.
 
+![image-detection-scene](https://github.com/hyeffie/authlabs-parkhyejeong/assets/56967908/8445a4a5-fa8d-4dfa-af35-596475d5e52c)
+
+![marker-selection-scene](https://github.com/hyeffie/authlabs-parkhyejeong/assets/56967908/70985ad9-03ff-4b30-90ad-230e395c9a58)
+
+
 ## **기획 과정 중 고민**
 
 1. **사용자 경험 개선**
