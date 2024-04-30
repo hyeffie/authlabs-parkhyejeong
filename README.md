@@ -6,9 +6,9 @@
 
 *각 ARSession 에 선택한 마커를 반영하는 기능은 미구현 상태입니다.
 
-![image-detection-scene](https://github.com/hyeffie/authlabs-parkhyejeong/assets/56967908/8445a4a5-fa8d-4dfa-af35-596475d5e52c)
-
-![marker-selection-scene](https://github.com/hyeffie/authlabs-parkhyejeong/assets/56967908/70985ad9-03ff-4b30-90ad-230e395c9a58)
+| 이미지 인식 화면 | 마커 등록 화면 |
+| ------- | ------- |
+| ![image-detection-scene](https://github.com/hyeffie/authlabs-parkhyejeong/assets/56967908/8445a4a5-fa8d-4dfa-af35-596475d5e52c)    | ![marker-selection-scene](https://github.com/hyeffie/authlabs-parkhyejeong/assets/56967908/e33313b2-2e7d-47ce-abcb-2dc066ceeb8c)  |
 
 
 ## **기획 과정 중 고민**
