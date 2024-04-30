@@ -119,10 +119,16 @@ private extension ViewController {
     func setButton() {
         self.imageCountButton.configure(with: 10)
         let action = UIAction { action in
-            let randomNumber = (0...20).randomElement() ?? 0
-            self.imageCountButton.configure(with: randomNumber)
+//            let randomNumber = (0...20).randomElement() ?? 0
+//            self.imageCountButton.configure(with: randomNumber)
+            self.selectImages()
         }
         self.imageCountButton.setAction(action)
+    }
+    
+    func selectImages() {
+        let viewController = MarkerSelectionViewController()
+        self.present(viewController, animated: true)
     }
 }
 
